@@ -1,0 +1,15 @@
+version: "3.1"
+services:
+    test_mysql:
+        container_name: test_mariadb
+        image: mariadb
+        restart: always
+        environment:
+          MYSQL_DATABASE: guestbook
+          MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+          MYSQL_ROOT_HOST: '%'
+        ports:
+          - 3306:3306
+        volumes:
+          - $HOME/temp/test.sql:/test.sql
+        

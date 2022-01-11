@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JpbDataSourceConfig">
+    <data-sources>
+      <data-source id="41405cec-a612-475b-a093-c778de71c60d" name="guestbook" url="jdbc:mariadb://localhost:3306/guestbook" driverClass="org.mariadb.jdbc.Driver" />
+    </data-sources>
+    <data-source-infos>
+      <data-source-info id="" persistence-unit-name="Default" />
+    </data-source-infos>
+  </component>
+</project>
