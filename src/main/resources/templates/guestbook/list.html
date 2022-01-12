@@ -70,6 +70,7 @@
 
         <script th:inline="javascript">
             var msg = [[${msg}]];
+            console.log(msg);
             if (msg) {
                 var myModal = new bootstrap.Modal(document.getElementById('myModal'));
                 myModal.show();
