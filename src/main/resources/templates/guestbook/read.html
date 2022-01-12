@@ -18,9 +18,7 @@
 
     <div class="form-group">
       <label> Title</label>
-      <textarea class="form-control" rows="5" name="content" readonly>
-        [[${dto.content}]]
-      </textarea>
+      <textarea class="form-control" rows="5" name="content" readonly>[[${dto.content}]]</textarea>
     </div>
 
     <div class="form-group">
@@ -30,13 +28,13 @@
 
     <div class="form-group">
       <label> RegDate</label>
-      <input type="text" class="form-control" name="title"
+      <input type="text" class="form-control"
              th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd HH:mm:s')}" readonly>
     </div>
 
     <div class="form-group">
       <label> ModDate</label>
-      <input type="text" class="form-control" name="title"
+      <input type="text" class="form-control"
              th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:s')}" readonly>
     </div>
 
@@ -47,7 +45,7 @@
     </a>
 
     <a th:href="@{/guestbook/list(page=${requestDTO.page})}">
-      <button type="button" class="btn btn-primary"> List</button>
+      <button type="button" class="btn btn-info"> List</button>
     </a>
 
   </th:block>
