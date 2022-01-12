@@ -4,6 +4,7 @@ import com.bootcamp.guestbook.entity.Guestbook;
 import com.bootcamp.guestbook.entity.QGuestbook;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,6 +30,24 @@ class GuestbookRepositoryTest {
                     .build();
             System.out.println(guestbookRepository.save(guestbook));
         });
+    }
+
+    @Test
+    public void auditingTest() {
+        Guestbook guestbook = guestbookRepository.save(Guestbook.builder()
+                .content("audit")
+                .title("audit2")
+                .writer("me")
+                .build());
+        Guestbook guestbook1 = Guestbook.builder()
+                .gno(guestbook.getGno())
+                .title(guestbook.getTitle())
+                .content("modified")
+                .writer(guestbook.getWriter())
+                .build();
+        guestbook1 = guestbookRepository.save(guestbook1);
+        Assertions.assertNotEquals(guestbook.getModDate(), guestbook1.getModDate());
+        guestbookRepository.delete(guestbook1);
     }
 
     @Test
