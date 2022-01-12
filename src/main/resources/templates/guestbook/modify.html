@@ -8,6 +8,8 @@
 
         <form action="/guestbook/modify" method="post" id="form_action">
             <input type="hidden" name="page" id="page_info" th:value="${requestDTO.page}">
+            <input type="hidden" name="type" id="type_info" th:value="${requestDTO.type}">
+            <input type="hidden" name="keyword" id="keyword_info" th:value="${requestDTO.keyword}">
             <div class="form-group">
                 <label>Gno</label>
                 <input type="text" class="form-control" name="gno" th:value="${dto.gno}" readonly>
@@ -73,8 +75,13 @@
             document.getElementById("list_button").addEventListener(
                 "click", function () {
                     var pageInfo = document.getElementById("page_info");
+                    var typeInfo = document.getElementById("type_info");
+                    var keywordInfo = document.getElementById("keyword_info");
                     console.log(pageInfo);
+                    actionForm.reset();
                     actionForm.append(pageInfo);
+                    actionForm.append(typeInfo);
+                    actionForm.append(keywordInfo);
                     actionForm.setAttribute("action", "/guestbook/list");
                     actionForm.setAttribute("method", "get");
                     actionForm.submit();
