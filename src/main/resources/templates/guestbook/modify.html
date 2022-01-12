@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{layout/basic :: setContent(~{this::content} )}">
+    <th:block th:fragment="content">
+
+        <h1 class="mt-4">GuestBook Modify Page</h1>
+
+        <form action="/guestbook/modify" method="post" id="form_action">
+            <input type="hidden" name="page" id="page_info" th:value="${requestDTO.page}">
+            <div class="form-group">
+                <label>Gno</label>
+                <input type="text" class="form-control" name="gno" th:value="${dto.gno}" readonly>
+            </div>
+
+            <div class="form-group">
+                <label> Title</label>
+                <input type="text" class="form-control" name="title" th:value="${dto.title}">
+            </div>
+
+            <div class="form-group">
+                <label> Title</label>
+                <textarea class="form-control" rows="5" name="content" >[[${dto.content}]]</textarea>
+            </div>
+
+            <div class="form-group">
+                <label> Writer</label>
+                <input type="text" class="form-control" name="writer" th:value="${dto.writer}">
+            </div>
+
+            <div class="form-group">
+                <label> RegDate</label>
+                <input type="text" class="form-control"
+                       th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd HH:mm:s')}" readonly>
+            </div>
+
+            <div class="form-group">
+                <label> ModDate</label>
+                <input type="text" class="form-control"
+                       th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:s')}" readonly>
+            </div>
+        </form>
+
+        <p></p>
+
+        <button type="button" class="btn btn-primary" id="modify_button"> Modify</button>
+        <button type="button" class="btn btn-info" id="list_button"> List</button>
+        <button type="button" class="btn btn-danger" id="remove_button"> Remove</button>
+
+        <script th:inline="javascript">
+
+            var actionForm = document.getElementById("form_action");
+
+            document.getElementById("remove_button").addEventListener(
+                "click", function () {
+                    actionForm.setAttribute("action", "/guestbook/remove");
+                    actionForm.setAttribute("method", "post");
+                    actionForm.submit();
+                }
+            );
+
+            document.getElementById("modify_button").addEventListener(
+                "click", function () {
+                    if (!confirm("수정하시겠습니까?")) {
+                        return ;
+                    }
+                    actionForm.setAttribute("action", "/guestbook/modify");
+                    actionForm.setAttribute("method", "post");
+                    actionForm.submit();
+                }
+            )
+
+            document.getElementById("list_button").addEventListener(
+                "click", function () {
+                    var pageInfo = document.getElementById("page_info");
+                    console.log(pageInfo);
+                    actionForm.append(pageInfo);
+                    actionForm.setAttribute("action", "/guestbook/list");
+                    actionForm.setAttribute("method", "get");
+                    actionForm.submit();
+                }
+            )
+
+        </script>
+    </th:block>
+</th:block>
