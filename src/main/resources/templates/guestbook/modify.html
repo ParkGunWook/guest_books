@@ -43,11 +43,18 @@
             </div>
         </form>
 
+
+        <form action="/guestbook/list" method="get" id="list_action">
+            <input type="hidden" name="page" id="page_info" th:value="${requestDTO.page}">
+            <input type="hidden" name="type" id="type_info" th:value="${requestDTO.type}">
+            <input type="hidden" name="keyword" id="keyword_info" th:value="${requestDTO.keyword}">
+        </form>
+
         <p></p>
 
-        <button type="button" class="btn btn-primary" id="modify_button"> Modify</button>
-        <button type="button" class="btn btn-info" id="list_button"> List</button>
-        <button type="button" class="btn btn-danger" id="remove_button"> Remove</button>
+        <button type="button" class="btn btn-primary modifyBtn" id="modify_button"> Modify</button>
+        <button type="button" class="btn btn-info listBtn" id="list_button"> List</button>
+        <button type="button" class="btn btn-danger removeBtn" id="remove_button"> Remove</button>
 
         <script th:inline="javascript">
 
@@ -70,23 +77,25 @@
                     actionForm.setAttribute("method", "post");
                     actionForm.submit();
                 }
-            )
+            );
 
-            document.getElementById("list_button").addEventListener(
-                "click", function () {
-                    var pageInfo = document.getElementById("page_info");
-                    var typeInfo = document.getElementById("type_info");
-                    var keywordInfo = document.getElementById("keyword_info");
-                    console.log(pageInfo);
-                    actionForm.reset();
-                    actionForm.append(pageInfo);
-                    actionForm.append(typeInfo);
-                    actionForm.append(keywordInfo);
-                    actionForm.setAttribute("action", "/guestbook/list");
-                    actionForm.setAttribute("method", "get");
-                    actionForm.submit();
-                }
-            )
+            var actionForm2 = $("form");
+            ${(".listBtn")}.click(function () {
+                var page = $("input[name='page']");
+                var type = $("input[name='type']");
+                var keyword = $("input[name='keyword']");
+
+                actionForm2.empty();
+                actionForm2.append(page);
+                actionForm2.append(type);
+                actionForm2.append(keyword);
+                actionForm2
+                    .attr("action", "/board/list")
+                    .attr("method", "get");
+                actionForm2.submit();
+            })
+
+
 
         </script>
     </th:block>
