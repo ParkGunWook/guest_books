@@ -71,6 +71,7 @@
                     actionForm.submit();
                 }
             )
+            var actionForm2 = $("form");
 
             document.getElementById("list_button").addEventListener(
                 "click", function () {
@@ -78,13 +79,12 @@
                     var typeInfo = document.getElementById("type_info");
                     var keywordInfo = document.getElementById("keyword_info");
                     console.log(pageInfo);
-                    actionForm.reset();
-                    actionForm.append(pageInfo);
-                    actionForm.append(typeInfo);
-                    actionForm.append(keywordInfo);
-                    actionForm.setAttribute("action", "/guestbook/list");
-                    actionForm.setAttribute("method", "get");
-                    actionForm.submit();
+                    actionForm2.empty();
+                    actionForm2.append(pageInfo);
+                    actionForm2.append(typeInfo);
+                    actionForm2.append(keywordInfo);
+                    actionForm2.attr("action", "/guestbook/list").attr("method", "get");
+                    actionForm2.submit();
                 }
             )
 

@@ -28,7 +28,7 @@
             <input class="form-control" name="keyword" th:value="${pageRequestDTO.keyword}">
             <div class="input-group-append" id="button-addon4">
                 <button class="btn btn-outline-secondary btn-search" type="button" id="search_button">Search</button>
-                <button class="btn btn-outline-secondary btn-clear" type="reset" id="clear_button">Clear</button>
+                <button class="btn btn-outline-secondary btn-clear" type="button" id="clear_button">Clear</button>
             </div>
             </div>
         </form>
@@ -109,13 +109,11 @@
                 "click", function () {
                     searchForm.submit();
                 }
-            );
-
-            document.getElementById("clear_button").addEventListener(
-                "click", function () {
-                    searchForm.reset().submit();
-                }
-            );
+            )
+            var searchForm2 = $("#searchForm");
+            $('.btn-clear').click(function (e) {
+                searchForm2.empty().submit();
+            })
         </script>
 
     </th:block>
